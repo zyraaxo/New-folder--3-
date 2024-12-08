@@ -485,3 +485,4 @@ C:\Users\NDog\New folder (3)\MauiApp1\obj\Debug\net8.0-windows10.0.19041.0\win10
 C:\Users\NDog\New folder (3)\MauiApp1\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\logo.scale-150.png
 C:\Users\NDog\New folder (3)\MauiApp1\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\logo.scale-125.png
 C:\Users\NDog\New folder (3)\MauiApp1\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\logo.scale-100.png
+C:\Users\NDog\New folder (3)\MauiApp1\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\MauiApp1.sourcelink.json

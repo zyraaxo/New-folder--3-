@@ -5,7 +5,7 @@
 
     <ScrollView>
         <Grid Padding="20"
-              RowDefinitions="Auto, Auto, Auto, *"
+              RowDefinitions="Auto, Auto, Auto, Auto, Auto, *"
               ColumnDefinitions="*">
             <!-- Logo -->
             <Image Grid.Row="0"
@@ -79,6 +79,19 @@
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    IsVisible="False"/>
+
+            <!-- Another Button Below Image -->
+            <Button Grid.Row="5"
+                    x:Name="AnotherActionButton"
+                    Text="Next Image"
+                    BackgroundColor="#FF5722"
+                    TextColor="White"
+                    Padding="10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center"
+                    IsVisible="False"
+                    Clicked="OnAnotherActionClicked"/>
+
         </Grid>
     </ScrollView>
 
