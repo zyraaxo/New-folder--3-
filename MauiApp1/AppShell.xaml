@@ -1,0 +1,28 @@
+<Shell
+    x:Class="MauiApp1.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MauiApp1"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False"
+    Shell.BackgroundColor="#F2F2F2"
+    Shell.ForegroundColor="#FFF04747"
+    Shell.TitleColor="Black">
+
+    <ShellContent
+        Title="Dashboard"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage">
+
+        <Shell.TitleView>
+            <Grid>
+                <Image Source="Logo.png"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       HeightRequest="100"
+                       WidthRequest="120"/>
+            </Grid>
+        </Shell.TitleView>
+
+    </ShellContent>
+</Shell>

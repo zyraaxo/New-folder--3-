@@ -1,0 +1,85 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+             BackgroundColor="#47555E">
+
+    <ScrollView>
+        <Grid Padding="20"
+              RowDefinitions="Auto, Auto, Auto, *"
+              ColumnDefinitions="*">
+            <!-- Logo -->
+            <Image Grid.Row="0"
+                   Source="Logo.png"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                   HeightRequest="180"
+                   WidthRequest="180"/>
+
+            <!-- My Files Label -->
+            <Label Grid.Row="1"
+                   Text="My Files"
+                   FontSize="30"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"/>
+
+            <!-- StackLayout with File Collection -->
+            <StackLayout Grid.Row="2"
+                         BackgroundColor="#D5D7D8"
+                         Padding="10"
+                         Margin="0,10,0,0"
+                         WidthRequest="250"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Start">
+                <CollectionView x:Name="FilesCollectionView"
+                                ItemsSource="{Binding Files}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*, Auto"
+                                  Padding="5">
+                                <!-- File Name -->
+                                <Label Grid.Column="0"
+                                       Text="{Binding FileName}"
+                                       TextColor="Black"
+                                       VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.FileTappedCommand}"
+                                                              CommandParameter="{Binding FilePath}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <!-- Action Button -->
+                                <Button Grid.Column="1"
+                                        Text="Open"
+                                        BackgroundColor="#4CAF50"
+                                        TextColor="White"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.FileTappedCommand}"
+                                        CommandParameter="{Binding FilePath}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+            <!-- Button to Add Files -->
+            <Button Grid.Row="3"
+                    Text="Add Files"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    Padding="10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="End"
+                    Clicked="OnAddFilesClicked"/>
+
+            <!-- Image Viewer -->
+            <Image Grid.Row="4"
+                   x:Name="SelectedImage"
+                   Aspect="AspectFit"
+                   HeightRequest="200"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   IsVisible="False"/>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
