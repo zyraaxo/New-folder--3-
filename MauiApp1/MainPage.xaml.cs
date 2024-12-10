@@ -58,27 +58,21 @@ namespace MauiApp1
 		{
 			if (filePath.EndsWith(".png", StringComparison.OrdinalIgnoreCase) || filePath.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase))
 			{
-				// Set the selected image
 				SelectedImage.Source = ImageSource.FromFile(filePath);
 				SelectedImage.IsVisible = true;
 
-				// Update the current image index
 				currentImageIndex = Files.ToList().IndexOf(Files.FirstOrDefault(f => f.FilePath == filePath));
 
-				// Make the 'Next Image' button visible
 				AnotherActionButton.IsVisible = true;
 			}
 		}
 
 		private void OnAnotherActionClicked(object sender, EventArgs e)
 		{
-			// Check if there are multiple files
 			if (Files.Count > 1)
 			{
-				// Increment the image index (loop back to 0 if it's the last image)
 				currentImageIndex = (currentImageIndex + 1) % Files.Count;
 
-				// Display the next image in the collection
 				var nextFilePath = Files[currentImageIndex].FilePath;
 				SelectedImage.Source = ImageSource.FromFile(nextFilePath);
 			}
@@ -88,11 +82,42 @@ namespace MauiApp1
 		{
 			await DisplayAlert("Button Clicked", "You clicked the button next to the image!", "OK");
 		}
+		private async void DeleteItem(object sender, EventArgs e)
+		{
+			if (sender is not Button button)
+			{
+				await DisplayAlert("Error", "Unexpected sender type.", "OK");
+				return;
+			}
+
+			if (button.BindingContext is not FileItem fileItem)
+			{
+				await DisplayAlert("Error", "File item not found.", "OK");
+				return;
+			}
+
+			bool confirm = await DisplayAlert("Delete File", $"Are you sure you want to delete '{fileItem.FileName}'?", "Yes", "No");
+			if (confirm)
+			{
+				Files.Remove(fileItem);
+
+				if (SelectedImage.Source != null && SelectedImage.Source.ToString() == fileItem.FilePath)
+				{
+					SelectedImage.IsVisible = false;
+					AnotherActionButton.IsVisible = false;
+				}
+
+				await DisplayAlert("File Deleted", $"{fileItem.FileName} has been deleted.", "OK");
+			}
+		}
+
 	}
 
 	public class FileItem
 	{
 		public required string FileName { get; set; }
 		public required string FilePath { get; set; }
+		public string ShortenedFileName => FileName.Length > 10 ? FileName.Substring(0, 10) + "..." : FileName;
+
 	}
 }

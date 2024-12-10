@@ -35,11 +35,11 @@
                                 ItemsSource="{Binding Files}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid ColumnDefinitions="*, Auto"
+                            <Grid ColumnDefinitions="*, Auto, Auto"
                                   Padding="5">
-                                <!-- File Name -->
+                                <!-- File Name Label -->
                                 <Label Grid.Column="0"
-                                       Text="{Binding FileName}"
+                                       Text="{Binding ShortenedFileName}"
                                        TextColor="Black"
                                        VerticalOptions="Center">
                                     <Label.GestureRecognizers>
@@ -48,20 +48,30 @@
                                     </Label.GestureRecognizers>
                                 </Label>
 
-                                <!-- Action Button -->
+
+                                <!-- First Button -->
                                 <Button Grid.Column="1"
                                         Text="Open"
                                         BackgroundColor="#4CAF50"
                                         TextColor="White"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.FileTappedCommand}"
                                         CommandParameter="{Binding FilePath}"/>
+
+                                <!-- Second Button -->
+                                <Button Grid.Column="2"
+                                        Text="Delete"
+                                        BackgroundColor="#FFFF1818"
+                                        TextColor="White"
+                                        Clicked="DeleteItem"
+                                        CommandParameter="{Binding FilePath}"/>
                             </Grid>
+
+
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </StackLayout>
 
-            <!-- Button to Add Files -->
             <Button Grid.Row="3"
                     Text="Add Files"
                     BackgroundColor="#4CAF50"
@@ -71,7 +81,6 @@
                     VerticalOptions="End"
                     Clicked="OnAddFilesClicked"/>
 
-            <!-- Image Viewer -->
             <Image Grid.Row="4"
                    x:Name="SelectedImage"
                    Aspect="AspectFit"
@@ -80,7 +89,6 @@
                    VerticalOptions="Center"
                    IsVisible="False"/>
 
-            <!-- Another Button Below Image -->
             <Button Grid.Row="5"
                     x:Name="AnotherActionButton"
                     Text="Next Image"
